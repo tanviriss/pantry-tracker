@@ -4,6 +4,7 @@ import {useState, useEffect} from "react";
 import {firestore} from "../firebase";
 import { Box, Typography, Modal, Stack, TextField, Button} from "@mui/material";
 import { query, collection, getDocs, setDoc, doc, deleteDoc, getDoc } from "firebase/firestore";
+import Bot from "@/component/bot";
 
 export default function Home() {
   const [inventory, setInventory] = useState([]);
@@ -32,7 +33,7 @@ export default function Home() {
       await setDoc(docRef, {quantity: quantity + 1})
     }
     else(
-      await setDoc(docRef, {quantity: 1})
+      await setDoc(docRef, {quantity: 1, name: item})
     )
     await updateInventory()
   }
@@ -119,6 +120,7 @@ export default function Home() {
       >
         Add New Item
       </Button>
+      <Bot />
       <Box border="1px solid #333">
         <Box width="800px" height="100px" bgcolor="#ADD8E6" display="flex" alignItems="center" justifyContent="center">
           <Typography variant="h2" color="#333">Inventory Items</Typography>
